@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssmBase.mapper.BookMapper">
+
+    <insert id="insertBook" parameterType="Books">
+        INSERT INTO ssmbuild.books(bookName, bookCounts, detail)
+        VALUES (#{bookName}, #{bookCounts}, #{detail});
+    </insert>
+
+    <!--删除-->
+    <delete id="deleteBook" parameterType="int">
+        DELETE
+        FROM ssmbuild.books
+        WHERE bookID = #{bookID};
+    </delete>
+
+    <!--修改-->
+    <update id="updateBook" parameterType="Books">
+        UPDATE ssmbuild.books
+        SET bookName=#{bookName},
+            bookCounts=#{bookCounts},
+            detail=#{detail}
+        WHERE bookID = #{bookID};
+    </update>
+
+    <!--根据ID查询-->
+    <select id="queryBookById" resultType="Books">
+        SELECT *
+        FROM ssmbuild.books
+        WHERE bookID = #{bookId};
+    </select>
+
+    <!--查询全部-->
+    <select id="queryAllBook" resultType="Books">
+        SELECT *
+        FROM ssmbuild.books;
+    </select>
+
+    <!--模糊查询-->
+    <select id="queryBookName" resultType="Books">
+        SELECT *
+        FROM ssmbuild.books
+        WHERE bookName LIKE CONCAT('%', #{bookName}, '%');
+    </select>
+</mapper>
